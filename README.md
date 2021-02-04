@@ -1,1 +1,1 @@
-# ideaz
+# Ideaz
