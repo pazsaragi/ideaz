@@ -6,7 +6,6 @@ import (
 )
 
 func Routes(router *gin.Engine) {
-	//curl localhost:8080/ping
 	router.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "pong",
@@ -14,10 +13,22 @@ func Routes(router *gin.Engine) {
 		})
 	})
 	userHandler := new(handler.UserHandler)
-	v1 := router.Group("/v1")
-	userRoutes := v1.Group("/user")
+	userRoutes := router.Group("/v1/user")
 
 	userRoutes.POST("/login", userHandler.Login)
 	userRoutes.POST("/create", userHandler.Create)
-	// authRoutes.POST("/verify", authHandler.Verify)
+
+	ideaHandler := new(handler.IdeaHandler)
+	ideaRoutes := router.Group("/v1/ideas")
+	{
+		ideaRoutes.POST("/", ideaHandler.Create)
+		ideaRoutes.GET("/:id", ideaHandler.FindIdeasByAlias)
+	}
+
+	cmtHandler := new(handler.CommentHandler)
+	cmtRoutes := router.Group("/v1/comments")
+	{
+		cmtRoutes.POST("/", cmtHandler.Create)
+		cmtRoutes.GET("/:id", cmtHandler.FindCommentsByIdea)
+	}
 }

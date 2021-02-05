@@ -55,11 +55,9 @@ func (a UserHandler) Login(c *gin.Context) {
 		c.JSON(http.StatusUnprocessableEntity, "Invalid json provided")
 		return
 	}
-	//compare the user from the request, with the one we defined:
-	// Todo : compare hash
-	user, err := models.FindByCode(u.Code)
+	user, err := models.FindUserByCode(u.Code)
 	if err != nil {
-		c.JSON(http.StatusUnauthorized, "Please provide valid email")
+		c.JSON(http.StatusBadRequest, "Please provide valid code")
 		return
 	}
 	c.JSON(http.StatusOK, user)

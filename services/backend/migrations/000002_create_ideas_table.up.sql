@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS ideas(
    idea_id serial PRIMARY KEY,
-   title VARCHAR (50) UNIQUE NOT NULL,
-   content VARCHAR (1000) UNIQUE NOT NULL,
+   title VARCHAR (50) NOT NULL,
+   content VARCHAR (1000) NOT NULL,
    user_id bigint
 );
 

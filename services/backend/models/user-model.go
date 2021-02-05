@@ -17,7 +17,7 @@ func UserExists(alias string) (bool, error) {
 	var user User
 	result := DB.Where("alias = ?", alias).First(&user)
 	if result.Error != nil {
-		return false, nil
+		return false, result.Error
 	}
 
 	return true, nil
@@ -37,9 +37,27 @@ func CreateUser(input inputs.UserInput) (*User, error) {
 	return &newUser, nil
 }
 
-func FindByCode(code string) (*User, error) {
+func FindUserByCode(code string) (*User, error) {
 	var user User;
 	if err := DB.Where("code = ?", code).First(&user).Error; err != nil {
+		return nil, err
+	}
+
+	return &user, nil
+}
+
+func FindUserByAlias(Alias string) (*User, error) {
+	var user User;
+	if err := DB.Where("alias = ?", Alias).First(&user).Error; err != nil {
+		return nil, err
+	}
+
+	return &user, nil
+}
+
+func FindUserById(user_id string) (*User, error) {
+	var user User;
+	if err := DB.Where("user_id = ?", user_id).First(&user).Error; err != nil {
 		return nil, err
 	}
 
