@@ -11,7 +11,7 @@ export default function Navbar() {
         </BreadcrumbItem>
 
         <BreadcrumbItem>
-          <BreadcrumbLink href="#">Docs</BreadcrumbLink>
+          <BreadcrumbLink href="/feed">Ideas</BreadcrumbLink>
         </BreadcrumbItem>
 
         <BreadcrumbItem isCurrentPage>

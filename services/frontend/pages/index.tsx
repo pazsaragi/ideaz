@@ -1,10 +1,15 @@
 import Link from "next/link";
 import Layout from "../components/Layout";
-import { Heading, Text } from "@chakra-ui/react";
+import { Heading, Text, Box } from "@chakra-ui/react";
 
 const IndexPage = () => (
   <Layout title="Home | Next.js + TypeScript Example">
-    <Heading>Welcome to Ideaz! 👋</Heading>
+    <Box>
+      <Heading>
+        Welcome to <Text color="purple.500">Ideaz!</Text> 👋
+      </Heading>
+    </Box>
+
     <Text>
       Where Entrepreneurs, problem solvers and those who can do both, come
       together!
