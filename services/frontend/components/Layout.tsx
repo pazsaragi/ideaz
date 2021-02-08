@@ -11,7 +11,7 @@ type Props = {
 };
 
 const Layout = ({ children, title = "Ideaz" }: Props) => (
-  <div>
+  <Container bgColor="brand.layout.main" maxWidth="100%">
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
@@ -23,7 +23,7 @@ const Layout = ({ children, title = "Ideaz" }: Props) => (
     </header>
     <Container maxWidth="90%">{children}</Container>
     <Footer />
-  </div>
+  </Container>
 );
 
 export default Layout;

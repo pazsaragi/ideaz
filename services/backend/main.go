@@ -6,7 +6,6 @@ import (
 	"github.com/devtshape/ideaz/services/backend/models"
 	"github.com/devtshape/ideaz/services/backend/routes"
 	"github.com/joho/godotenv"
-
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )

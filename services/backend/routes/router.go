@@ -12,17 +12,20 @@ func Routes(router *gin.Engine) {
 			"service": "auth",
 		})
 	})
-	userHandler := new(handler.UserHandler)
-	userRoutes := router.Group("/v1/user")
+	// userHandler := new(handler.UserHandler)
+	// userRoutes := router.Group("/v1/user")
 
-	userRoutes.POST("/login", userHandler.Login)
-	userRoutes.POST("/create", userHandler.Create)
+	// userRoutes.POST("/login", userHandler.Login)
+	// userRoutes.POST("/create", userHandler.Create)
 
 	ideaHandler := new(handler.IdeaHandler)
 	ideaRoutes := router.Group("/v1/ideas")
 	{
 		ideaRoutes.POST("/", ideaHandler.Create)
-		ideaRoutes.GET("/:id", ideaHandler.FindIdeasByAlias)
+		ideaRoutes.GET("/", ideaHandler.GetIdeaFeed)
+		ideaRoutes.GET("/detail/:id", ideaHandler.GetIdeaById)
+		ideaRoutes.POST("/profile/email", ideaHandler.GetIdeasByEmail)
+		ideaRoutes.POST("/profile/name", ideaHandler.GetIdeasByName)
 	}
 
 	cmtHandler := new(handler.CommentHandler)
@@ -30,5 +33,12 @@ func Routes(router *gin.Engine) {
 	{
 		cmtRoutes.POST("/", cmtHandler.Create)
 		cmtRoutes.GET("/:id", cmtHandler.FindCommentsByIdea)
+	}
+
+	catHandler := new(handler.CategoryHandler)
+	catRoutes := router.Group("/v1/categories")
+	{
+		catRoutes.POST("/", catHandler.Create)
+		catRoutes.GET("/", catHandler.GetAllCategories)
 	}
 }

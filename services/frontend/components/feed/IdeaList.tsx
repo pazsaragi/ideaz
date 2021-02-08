@@ -5,13 +5,16 @@ import IdeaListItem from "./IdeaListItem";
 
 interface Props {
   ideas: IdeaModel[];
+  onReadMore: (id: number) => void;
 }
 
-const IdeaList = ({ ideas }: Props) => {
+const IdeaList = ({ ideas, onReadMore }: Props) => {
   return (
     <Box>
-      {ideas.map((i) => (
-        <IdeaListItem idea={i} />
+      {ideas.map((i, idx) => (
+        <React.Fragment key={idx}>
+          <IdeaListItem onReadMore={onReadMore} idea={i} />
+        </React.Fragment>
       ))}
     </Box>
   );

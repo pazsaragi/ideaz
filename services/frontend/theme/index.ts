@@ -15,8 +15,20 @@ export const GlobalTheme = extendTheme({
       800: "#009F9F",
       900: "#009F9F",
       font: {
-        1: "#ffff",
+        prim: "white",
+        sec: "#2A9D8F",
+        ter: "#E9C46A",
+        four: "#F4A261",
+        five: "#E76F51",
       },
+      layout: {
+        main: "#F9F9F9",
+      },
+      prim: "#264653",
+      sec: "#2A9D8F",
+      ter: "#E9C46A",
+      four: "#F4A261",
+      five: "#E76F51",
     },
     border: {
       50: "#F5F5F5",
@@ -30,6 +42,10 @@ export const GlobalTheme = extendTheme({
       800: "#F5F5F5",
       900: "#F5F5F5",
     },
+  },
+  fonts: {
+    heading: "Roboto",
+    body: "Roboto",
   },
   fontSizes: {
     xs: "12px",

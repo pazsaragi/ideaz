@@ -2,7 +2,8 @@ package inputs
 
 type CommentInput struct {
 	Content   string `json:"content" binding:"required"`
-	UserId  int `json:"user_id" binding:"required"`
+	Email  string `json:"email"`
+	Name  string `json:"name"`
 	IdeaId  int `json:"idea_id" binding:"required"`
 }
 

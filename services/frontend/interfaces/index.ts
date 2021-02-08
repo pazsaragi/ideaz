@@ -4,28 +4,62 @@
 //
 // import { User } from 'path/to/interfaces';
 
+export type BaseModel = {
+  id: number;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string;
+};
+
 export type User = {
   id: number;
   name: string;
 };
 
-export type CategoryModel = {
-  title: string;
-  src: string;
-  description: string;
-  href: string;
+export type CategoryModel = BaseModel & {
+  name: string;
+  img: string;
+  color: string;
+  ideas?: IdeaModel[];
 };
 
-export type IdeaModel = {
-  id: number;
+export type IdeaModel = BaseModel & {
   title: string;
   content: string;
-  alias: string;
+  email?: string;
+  name?: string;
   like: number;
   comments_count: number;
+  categories?: CategoryModel[];
 };
 
 export type CreateIdeaModel = {
   title: string;
   content: string;
+  email?: string;
+  name?: string;
+  categories?: { id: number }[];
+};
+
+export type GetIdeaByNameModel = {
+  name: string;
+};
+
+export type GetIdeaByEmailModel = {
+  email: string;
+};
+
+export type CommentModel = BaseModel & {
+  comment_id: number;
+  content: string;
+  email?: string;
+  name?: string;
+  idea_id: number;
+};
+
+export type CreateCommentModel = {
+  content: string;
+  email?: string;
+  name?: string;
+  idea_id: number;
 };

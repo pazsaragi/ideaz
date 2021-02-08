@@ -1,4 +1,4 @@
-import { Box, Badge, Button, Stack } from "@chakra-ui/react";
+import { Box, Badge, Button, Stack, Heading, Center } from "@chakra-ui/react";
 import * as React from "react";
 import Image from "next/image";
 import { CategoryModel } from "../../interfaces";
@@ -16,39 +16,30 @@ const FeedCategory = ({ category }: Props) => {
       borderRadius="lg"
       overflow="hidden"
       textAlign="center"
+      bgColor={category?.color ?? "brand.primary"}
+      border="0px"
+      height="100px"
+      color="brand.font.prim"
+      _hover={{
+        background: "white",
+        color: category?.color ?? "black",
+        transition: "ease-in 0.2s",
+        cursor: "pointer",
+      }}
     >
-      <Image src={category.src} alt="tech" width={100} height={100} />
-
-      <Box>
-        <Badge borderRadius="full" px="2" colorScheme="teal">
-          New
-        </Badge>
+      <Center h="inherit">
         <Box
-          color="gray.500"
+          mt="1"
           fontWeight="semibold"
-          letterSpacing="wide"
-          fontSize="xs"
-          textTransform="uppercase"
-          ml="2"
+          as="h4"
+          lineHeight="tight"
+          isTruncated
         >
-          {category.description}
+          <Heading as="h4" fontSize="18px">
+            {category.name}
+          </Heading>
         </Box>
-      </Box>
-
-      <Box mt="1" fontWeight="semibold" as="h4" lineHeight="tight" isTruncated>
-        {category.title}
-      </Box>
-
-      <Stack direction="row" spacing={4}>
-        <Button
-          isLoading={false}
-          loadingText="Submitting"
-          colorScheme="teal"
-          variant="outline"
-        >
-          <Link href={"/feed/" + category.href}>More...</Link>
-        </Button>
-      </Stack>
+      </Center>
     </Box>
   );
 };

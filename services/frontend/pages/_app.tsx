@@ -4,13 +4,17 @@ import { AppProps } from "next/app";
 import { GlobalTheme } from "../theme";
 import { Global } from "@emotion/react";
 import fonts from "../styles/font-face";
+import { Provider as AuthProvider } from "next-auth/client";
 
 function App({ Component, pageProps }: AppProps): React.ReactNode {
+  const { session } = pageProps;
   return (
     <ThemeProvider theme={GlobalTheme}>
       <Global styles={[fonts]} />
       <CSSReset />
-      <Component {...pageProps} />
+      <AuthProvider session={session}>
+        <Component {...pageProps} />
+      </AuthProvider>
     </ThemeProvider>
   );
 }

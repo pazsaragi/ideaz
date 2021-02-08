@@ -2,21 +2,28 @@ package models
 
 import (
 	"github.com/devtshape/ideaz/services/backend/inputs"
+	"gorm.io/gorm"
+	"time"
 )
 
 
 type Comment struct {
-	CommentID uint   `json:"comment_id" gorm:"PRIMARY_KEY;AUTO_INCREMENT"`
+	ID uint           `json:"id" gorm:"primaryKey"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
+	DeletedAt gorm.DeletedAt `json:"deleted_at" gorm:"index"`
 	Content   string `json:"content" gorm:"Type:varchar(300);NOT NULL"`
-	UserId  int `json:"user_id" gorm:"Type:bigint;NOT NULL"`
-	IdeaId  int `json:"idea_id" gorm:"Type:bigint;NOT NULL"`
+	Email  string `json:"email" gorm:"Type:varchar(50);"`
+	Name  string `json:"name" gorm:"Type:varchar(50);"`
+	IdeaId  int `json:"idea_id"`
 }
 
 //Create Comment
 func CreateComment(input inputs.CommentInput) (*Comment, error) {
 	var newCmt Comment = Comment{
 		Content:  input.Content,
-		UserId: 	input.UserId,
+		Email: 	input.Email,
+		Name: 	input.Name,
 		IdeaId: 	input.IdeaId,
 	}
 	if err := DB.Create(&newCmt).Error; err != nil {
