@@ -18,7 +18,7 @@ interface Props {
 }
 
 export default function CreateCommentForm({ idea_id, onCreateComment }: Props) {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, reset } = useForm();
   const [session] = useSession();
 
   const onSubmit = (data: CreateCommentModel) => {
@@ -29,6 +29,7 @@ export default function CreateCommentForm({ idea_id, onCreateComment }: Props) {
     }
     data.idea_id = idea_id;
     onCreateComment(data);
+    reset();
   };
 
   return (

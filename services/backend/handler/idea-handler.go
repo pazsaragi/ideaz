@@ -126,3 +126,23 @@ func (a IdeaHandler) GetIdeaById(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, idea)
 }
+
+/*
+curl --location --request POST 'http://localhost:8080/v1/ideas' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "title": "Greate Ideas",
+    "content": "Blah blah.....",
+    "user_id": 1
+}'
+*/
+// func (a IdeaHandler) LikeIdea(c *gin.Context) {
+// 	id := c.Params.ByName("id")
+	
+// 	err := models.LikeIdea(id);
+// 	if err != nil {
+// 		c.JSON(http.StatusInternalServerError, "Whoops! Something went wrong!")
+// 		return
+// 	}
+// 	c.JSON(http.StatusOK, "Idea liked!")
+// }

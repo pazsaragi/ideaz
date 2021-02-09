@@ -41,4 +41,10 @@ func Routes(router *gin.Engine) {
 		catRoutes.POST("/", catHandler.Create)
 		catRoutes.GET("/", catHandler.GetAllCategories)
 	}
+
+	likeHandler := new(handler.LikeHandler)
+	likeRoutes := router.Group("/v1/likes")
+	{
+		likeRoutes.POST("/", likeHandler.Create)
+	}
 }

@@ -2,6 +2,7 @@ import { refreshData } from "../components/idea/CreateCommentForm";
 import {
   CreateCommentModel,
   CreateIdeaModel,
+  CreateLikeModel,
   GetIdeaByEmailModel,
   GetIdeaByNameModel,
   IdeaModel,
@@ -111,6 +112,21 @@ export const createCommentAPI = async (
 export const fetchCategoriesAPI = async (): Promise<IdeaModel[]> => {
   const res = await fetch(process.env.BACKEND + "/v1/categories/", {
     method: "GET",
+  });
+
+  const result = await res.json();
+  return result;
+};
+
+export const likeIdeaAPI = async (d: CreateLikeModel): Promise<IdeaModel[]> => {
+  const res = await fetch("http://localhost:3000/api/likes", {
+    body: JSON.stringify({
+      ...d,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "POST",
   });
 
   const result = await res.json();

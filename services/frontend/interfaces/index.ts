@@ -28,8 +28,8 @@ export type IdeaModel = BaseModel & {
   content: string;
   email?: string;
   name?: string;
-  like: number;
-  comments_count: number;
+  likes?: LikeModel[];
+  comments?: CommentModel[];
   categories?: CategoryModel[];
 };
 
@@ -59,6 +59,18 @@ export type CommentModel = BaseModel & {
 
 export type CreateCommentModel = {
   content: string;
+  email?: string;
+  name?: string;
+  idea_id: number;
+};
+
+export type LikeModel = BaseModel & {
+  email?: string;
+  name?: string;
+  idea_id: number;
+};
+
+export type CreateLikeModel = {
   email?: string;
   name?: string;
   idea_id: number;

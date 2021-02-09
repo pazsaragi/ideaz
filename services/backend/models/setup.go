@@ -39,7 +39,7 @@ func ConnectDataBase() {
 		panic("Failed to connect to database!")
 	}
 
-	database.AutoMigrate(&Idea{}, &Comment{}, &Category{})
+	database.AutoMigrate(&Idea{}, &Comment{}, &Category{}, &Like{},)
 
 	DB = database
 }

@@ -1,19 +1,9 @@
-import {
-  Box,
-  Badge,
-  Button,
-  Heading,
-  Text,
-  transition,
-  Grid,
-  Flex,
-} from "@chakra-ui/react";
+import { Box, Button, Heading, Text } from "@chakra-ui/react";
 import * as React from "react";
 import { IdeaModel } from "../../interfaces";
-import { HStack, Center } from "@chakra-ui/react";
+import { HStack } from "@chakra-ui/react";
 import { ChatIcon } from "@chakra-ui/icons";
 import { BsFillPersonFill } from "react-icons/bs";
-import { GiTeamIdea } from "react-icons/gi";
 import { Icon } from "@chakra-ui/react";
 import { MdLightbulbOutline } from "react-icons/md";
 import CategoryBadge from "../common/CategoryBadge";
@@ -21,10 +11,10 @@ import CategoryBadge from "../common/CategoryBadge";
 interface Props {
   idea: IdeaModel;
   onReadMore: (id: number) => void;
+  onLikeIdea: (id: number) => void;
 }
 
-const IdeaListItem = ({ idea, onReadMore }: Props) => {
-  console.log(idea?.categories);
+const IdeaListItem = ({ idea, onReadMore, onLikeIdea }: Props) => {
   return (
     <Box
       border="1px"
@@ -48,15 +38,26 @@ const IdeaListItem = ({ idea, onReadMore }: Props) => {
           </Text>
         </Box>
         <Box>
-          <Icon as={MdLightbulbOutline} color="brand.100" fontSize="25px" />
+          <Icon
+            as={MdLightbulbOutline}
+            color="brand.100"
+            fontSize="25px"
+            _hover={{
+              cursor: "pointer",
+              backgroundColor: "brand.sec",
+              color: "brand.font.prim",
+              borderRadius: "100%",
+            }}
+            onClick={() => onLikeIdea(idea.id)}
+          />
           <Text fontSize="10px" color="brand.font.100" textAlign="center">
-            12
+            {idea?.likes?.length}
           </Text>
         </Box>
         <Box>
           <ChatIcon color="brand.100" fontSize="25px" />
           <Text fontSize="10px" color="brand.font.100" textAlign="center">
-            22
+            {idea?.comments?.length}
           </Text>
         </Box>
         <Box>

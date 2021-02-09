@@ -1,16 +1,18 @@
 import { Heading, Text, Box, Icon, Button, Link } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FeedCategories from "../../components/feed/FeedCategories";
 import IdeaList from "../../components/feed/IdeaList";
 import Layout from "../../components/Layout";
 import { CATEGORIES } from "../../data/categories";
 import { EditIcon } from "@chakra-ui/icons";
 import { IconButton } from "@chakra-ui/react";
-import { fetchCategoriesAPI, fetchIdeasAPI } from "../../lib";
+import { fetchCategoriesAPI, fetchIdeasAPI, likeIdeaAPI } from "../../lib";
 import { GetServerSideProps } from "next";
 import { CategoryModel, IdeaModel } from "../../interfaces";
-import { useRouter } from "next/router";
+import { NextRouter, useRouter } from "next/router";
 import SearchBar from "../../components/common/SearchBar";
+import { useSession } from "next-auth/client";
+import { refreshData } from "../../components/idea/CreateCommentForm";
 
 interface Props {
   ideas: IdeaModel[];
@@ -19,8 +21,13 @@ interface Props {
 
 const FeedPage = ({ ideas, categories }: Props) => {
   const router = useRouter();
+  const [session, loading] = useSession();
 
   const [ideaState, setIdeaState] = useState(ideas);
+
+  useEffect(() => {
+    setIdeaState(ideas);
+  }, [ideas]);
 
   const handleReadMore = (id: number) => {
     if (typeof window !== "undefined") {
@@ -33,6 +40,15 @@ const FeedPage = ({ ideas, categories }: Props) => {
       i.title.toLowerCase().includes(event.currentTarget.value)
     );
     setIdeaState(filterIdeas);
+  };
+
+  const handleLikeIdea = async (id: number) => {
+    await likeIdeaAPI({
+      idea_id: id,
+      email: session?.user?.email || "anonymous",
+      name: session?.user?.name || "anonymous",
+    });
+    await router.replace(router.asPath);
   };
 
   return (
@@ -61,7 +77,11 @@ const FeedPage = ({ ideas, categories }: Props) => {
         <Text>Feed:</Text>
       </Box>
       <Box>
-        <IdeaList ideas={ideaState} onReadMore={handleReadMore} />
+        <IdeaList
+          ideas={ideaState}
+          onReadMore={handleReadMore}
+          onLikeIdea={handleLikeIdea}
+        />
       </Box>
     </Layout>
   );

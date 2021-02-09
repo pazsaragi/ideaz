@@ -37,7 +37,7 @@ const IdeaPage = ({ idea, comments }: Props) => {
       <Box>{idea.title}</Box>
       <Box>{idea.content}</Box>
       <CreateCommentForm
-        idea_id={idea.idea_id}
+        idea_id={idea.id}
         onCreateComment={handleCreateComment}
       />
       <CommentList comments={comments} />
