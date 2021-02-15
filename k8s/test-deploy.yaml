@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aks-helloworld-three
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aks-helloworld-three
+  template:
+    metadata:
+      labels:
+        app: aks-helloworld-three
+    spec:
+      containers:
+      - name: aks-helloworld-three
+        image: nginx
+        ports:
+        - containerPort: 80
+        env:
+        - name: TITLE
+          value: "AKS three Ingress Demo"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aks-helloworld-three
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+  selector:
+    app: aks-helloworld-three
